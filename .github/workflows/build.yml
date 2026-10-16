@@ -21,21 +21,13 @@ jobs:
         java-version: '17'
 
     - name: Build APK with Gradle
-      env:
-        ANDROID_SDK_ROOT: /usr/local/lib/android/sdk
       run: |
-        # Generar gradlew si no existe
         if [ ! -f "gradlew" ]; then
           sudo apt-get update && sudo apt-get install -y gradle
           gradle wrapper --gradle-version 8.5
         fi
         chmod +x gradlew
-        
-        # Aceptar licencias del SDK de Android automáticamente
-        yes | $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager --licenses || true
-        
-        # Compilar el APK en modo debug
-        ./gradlew assembleDebug
+        ./gradlew assembleDebug --stacktrace
 
     - name: Upload APK Artifact
       uses: actions/upload-artifact@v4
