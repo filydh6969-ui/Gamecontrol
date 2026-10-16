@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#121212"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/tvStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/status_disconnected"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnConnect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_connect"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- D-Pad / Left area -->
+    <Button
+        android:id="@+id/btnA"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:text="A"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="60dp"
+        android:layout_marginBottom="40dp" />
+
+    <Button
+        android:id="@+id/btnB"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:text="B"
+        app:layout_constraintBottom_toTopOf="@id/btnA"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="10dp" />
+
+    <Button
+        android:id="@+id/btnX"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:text="X"
+        app:layout_constraintBottom_toBottomOf="@id/btnB"
+        app:layout_constraintEnd_toStartOf="@id/btnB"
+        android:layout_marginEnd="10dp" />
+
+    <Button
+        android:id="@+id/btnY"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:text="Y"
+        app:layout_constraintTop_toTopOf="@id/btnB"
+        app:layout_constraintEnd_toEndOf="@id/btnX" />
+
+    <!-- Simple Joysticks / Dpad placeholders -->
+    <Button
+        android:id="@+id/btnDpadUp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:text="↑"
+        app:layout_constraintBottom_toTopOf="@+id/btnDpadCenter"
+        app:layout_constraintStart_toStartOf="@+id/btnDpadCenter" />
+
+    <Button
+        android:id="@+id/btnDpadDown"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:text="↓"
+        app:layout_constraintTop_toTopOf="@+id/btnDpadCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/btnDpadCenter"
+        android:layout_marginBottom="40dp" />
+
+    <Button
+        android:id="@+id/btnDpadLeft"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:text="←"
+        app:layout_constraintEnd_toStartOf="@+id/btnDpadCenter"
+        app:layout_constraintTop_toTopOf="@+id/btnDpadCenter" />
+
+    <Button
+        android:id="@+id/btnDpadRight"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:text="→"
+        app:layout_constraintStart_toEndOf="@+id/btnDpadCenter"
+        app:layout_constraintTop_toTopOf="@+id/btnDpadCenter" />
+
+    <View
+        android:id="@+id/btnDpadCenter"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="#333333"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="80dp"
+        android:layout_marginBottom="80dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
