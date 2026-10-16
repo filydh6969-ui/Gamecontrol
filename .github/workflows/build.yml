@@ -20,12 +20,19 @@ jobs:
         distribution: 'temurin'
         java-version: '17'
 
-    - name: Build APK with Gradle
+    - name: Find Gradle project root
+      id: find-root
       run: |
-        if [ ! -f "gradlew" ]; then
-          sudo apt-get update && sudo apt-get install -y gradle
-          gradle wrapper --gradle-version 8.5
+        proj=$(git ls-files | grep -m1 -E '(^|/)settings\.gradle(\.kts)?$' || true)
+        if [ -z "$proj" ]; then
+          echo "No settings.gradle(.kts) found in repo."
+          exit 1
         fi
+        echo "project_root=$(dirname "$proj")" >> "$GITHUB_OUTPUT"
+
+    - name: Build APK with Gradle
+      working-directory: ${{ steps.find-root.outputs.project_root }}
+      run: |
         chmod +x gradlew
         ./gradlew assembleDebug --stacktrace
 
@@ -33,4 +40,4 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: app-debug
-        path: app/build/outputs/apk/debug/app-debug.apk
+        path: ${{ steps.find-root.outputs.project_root }}/app/build/outputs/apk/debug/app-debug.apk
