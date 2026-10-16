@@ -22,7 +22,6 @@ jobs:
 
     - name: Build APK with Gradle
       run: |
-        # Si el ejecutable de gradlew no está en la raíz, lo creamos automáticamente
         if [ ! -f "gradlew" ]; then
           sudo apt-get update && sudo apt-get install -y gradle
           gradle wrapper --gradle-version 8.5
