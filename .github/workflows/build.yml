@@ -20,21 +20,21 @@ jobs:
         distribution: 'temurin'
         java-version: '17'
 
-    - name: Install Gradle
+    - name: Build APK with Gradle
+      env:
+        ANDROID_SDK_ROOT: /usr/local/lib/android/sdk
       run: |
-        sudo apt-get update
-        sudo apt-get install -y gradle
-
-    - name: Setup Android SDK
-      uses: android-actions/setup-android@v3
-
-    - name: Generate Gradle Wrapper and Build
-      run: |
-        # Generar el envoltorio de Gradle si no existe en el repositorio
+        # Generar gradlew si no existe
         if [ ! -f "gradlew" ]; then
+          sudo apt-get update && sudo apt-get install -y gradle
           gradle wrapper --gradle-version 8.5
         fi
         chmod +x gradlew
+        
+        # Aceptar licencias del SDK de Android automáticamente
+        yes | $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager --licenses || true
+        
+        # Compilar el APK en modo debug
         ./gradlew assembleDebug
 
     - name: Upload APK Artifact
